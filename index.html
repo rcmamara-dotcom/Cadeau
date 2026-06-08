@@ -2,29 +2,39 @@
 <html>
 <head>
 <style>
-  body { display:flex; justify-content:center; align-items:center; height:100vh; background:#1a1a2e; flex-direction:column; }
-  #box { font-size:80px; cursor:pointer; transition:transform 0.2s; }
-  #box:hover { transform:scale(1.1); }
-  #glove { font-size:80px; cursor:pointer; display:none; animation:shake 0.3s infinite alternate; }
-  #message { font-size:40px; display:none; color:#ff4500; font-family:cursive; text-align:center; font-weight:bold; }
-  #explosion { font-size:60px; display:none; }
-  @keyframes shake { from{transform:rotate(-10deg)} to{transform:rotate(10deg)} }
+  body { display:flex; justify-content:center; align-items:center; height:100vh; background:#ffe6f0; flex-direction:column; gap:30px; overflow:hidden; }
+  #question { font-size:35px; font-family:cursive; color:#ff69b4; text-align:center; }
+  #buttons { display:flex; gap:40px; align-items:center; }
+  #oui { font-size:25px; padding:15px 30px; background:#ff69b4; color:white; border:none; border-radius:20px; cursor:pointer; font-family:cursive; }
+  #oui:hover { transform:scale(1.1); }
+  #non { font-size:25px; padding:15px 30px; background:#ff4500; color:white; border:none; border-radius:20px; cursor:pointer; font-family:cursive; position:fixed; }
+  #message { font-size:45px; display:none; color:#ff69b4; font-family:cursive; text-align:center; }
+  #explosion { font-size:60px; display:none; text-align:center; }
 </style>
 </head>
 <body>
 
-<div id="box" onclick="openBox()">🎁</div>
-<div id="glove" onclick="explodeGlove()">🥊</div>
-<div id="explosion">💥⚡💥⚡💥</div>
-<div id="message">😤 T'es un bâtard ! 😤</div>
+<div id="question">💕 Est-ce que tu m'aimes ? 💕</div>
+<div id="buttons">
+  <button id="oui" onclick="clickOui()">Oui 😍</button>
+  <button id="non" onmouseover="moveNon()" onclick="moveNon()">Non 😒</button>
+</div>
+<div id="explosion">💥✨💥✨💥</div>
+<div id="message">😘 Je le savais ! Bisou ! 😘</div>
 
 <script>
-function openBox() {
-  document.getElementById('box').style.display='none';
-  document.getElementById('glove').style.display='block';
+function moveNon() {
+  const btn = document.getElementById('non');
+  const x = Math.random() * (window.innerWidth - 150);
+  const y = Math.random() * (window.innerHeight - 80);
+  btn.style.left = x + 'px';
+  btn.style.top = y + 'px';
 }
-function explodeGlove() {
-  document.getElementById('glove').style.display='none';
+
+function clickOui() {
+  document.getElementById('question').style.display='none';
+  document.getElementById('buttons').style.display='none';
+  document.getElementById('non').style.display='none';
   document.getElementById('explosion').style.display='block';
   setTimeout(() => {
     document.getElementById('explosion').style.display='none';
